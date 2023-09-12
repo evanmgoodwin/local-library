@@ -10,7 +10,7 @@ function findAuthorById(authors, id) {
   return found;
  }
 
-// Return an array with two arrays inside of it
+// Return an array with two arrays inside of it. USE A HELPER FUNCTION TO TO BE CALLED IN A MAIN FUNCTION
  function partitionBooksByBorrowedStatus(books) {
   let returns = books.filter((book) =>
    book.borrows.every((borrow) => borrow.returned === true)

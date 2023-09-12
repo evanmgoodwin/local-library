@@ -11,19 +11,22 @@ function findAccountById(accounts, id) {
   );
   return accounts;
  }
- 
+
+// Create a helper function to be called in getTotalNumberofBorrows
+function booksById (book, {id}) {
+  return book.borrows.filter(borrow => borrow.id === id);
+}
+
 // Return a number of times the account's ID appears in any books' "borrows" array
  function getTotalNumberOfBorrows(account, books) {
   let total = 0;
-  for (let i = 0; i < books.length; i++) {
-   for (let j = 0; j < books[i].borrows.length; j++) {
-    if (account.id === books[i].borrows[j].id) {
-     total += 1;
-    }
-   }
-  }
-  return total;
+   books.forEach(book => {
+     let borrowedById = booksById(book, account);
+     total += borrowedById.length;
+   });
+   return total;
  }
+
  
  // Return an array of book objects that represents all books currently checked out by the account
  function getBooksPossessedByAccount(account, books, authors) {
